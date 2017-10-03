@@ -1,5 +1,6 @@
 package egypt.service.governmentall;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,7 @@ public class ChosePlace extends AppCompatActivity {
     ArrayList<String>garbiaPlaces;
     ArrayList<String>sharqialaces;
     ArrayList<String>mansoraPlaces;
-    String item ;
+    String item  ,item_place;
     Button serch ;
 
     @Override
@@ -39,6 +40,7 @@ public class ChosePlace extends AppCompatActivity {
         setContentView(R.layout.activity_chose_place);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         serch=(Button)findViewById(R.id.serch);
+        bundle=getIntent().getExtras();
 
         if (bundle!=null){
 
@@ -140,10 +142,10 @@ public class ChosePlace extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // On selecting a spinner item
-                item = parent.getItemAtPosition(position).toString();
+                item_place = parent.getItemAtPosition(position).toString();
 
                 // Showing selected spinner item
-                Toast.makeText(parent.getContext(),  item, Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getContext(),  item_place, Toast.LENGTH_LONG).show();
             }
             public void onNothingSelected(AdapterView<?> arg0) {
                 Toast.makeText(getApplicationContext(), "أختار منطقة" + item, Toast.LENGTH_LONG).show();
@@ -153,6 +155,12 @@ public class ChosePlace extends AppCompatActivity {
         serch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(ChosePlace.this,ShowNearPLACES.class);
+                intent.putExtra("ChoseTypeService",Tyep_OfTypeService);
+                intent.putExtra("serviceName",typeService);
+                intent.putExtra("gavernorate",item);
+                intent.putExtra("area",item_place);
+                startActivity(intent);
 
             }
         });
