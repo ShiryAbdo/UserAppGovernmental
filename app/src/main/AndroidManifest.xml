@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission
+        android:name="in.wptrafficanalyzer.locationroutedirectionmapv2.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
 
     <uses-library android:name="com.google.android.maps" />
 
@@ -45,7 +49,10 @@
 
         <activity
             android:name=".ShowINmap"
-            android:label="@string/title_activity_show_inmap"></activity>
+            android:label="@string/title_activity_show_inmap" />
+        <activity
+            android:name=".ShowAllInMap"
+            android:label="@string/title_activity_show_all_in_map"></activity>
     </application>
 
 </manifest>
