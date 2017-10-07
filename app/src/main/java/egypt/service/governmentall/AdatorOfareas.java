@@ -51,7 +51,7 @@ public class AdatorOfareas    extends RecyclerView.Adapter<AdatorOfareas.ViewHol
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,ShowINmap.class);
+                Intent intent = new Intent(context,ShowDirectionInmap.class);
 
                 intent.putExtra("LATITUDE_ID",androidList.get(i).getLatlangLocatio().latitude);
                 intent.putExtra("LONGITUDE_ID",androidList.get(i).getLatlangLocatio().longitude);
