@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layoutDirection="rtl"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@mipmap/background"
     tools:context="egypt.service.governmentall.ShowNearPLACES"
     android:orientation="vertical">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Show All in Map "
-        android:id="@+id/ShowALLinMap"
-        />
-
+<TextView
+    android:background="@drawable/rounded_border"
+    android:layout_width="wrap_content"
+    android:text="عرض الأماكن"
+    android:padding="@dimen/_3sdp"
+    android:gravity="center"
+    android:textSize="@dimen/_20sdp"
+    android:textColor="#000"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignRight="@+id/ShowALLinMap"
+    android:layout_alignEnd="@+id/ShowALLinMap"
+    android:layout_marginRight="67dp"
+    android:layout_marginEnd="67dp"
+    android:layout_marginTop="11dp"
+    android:id="@+id/textView2" />
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-         />
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
 
 
-
-    <TextView
+    <Button
+        android:layoutDirection="rtl"
+        android:id="@+id/ShowALLinMap"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="this "
-        android:id="@+id/latLongTV"
-       />
-</LinearLayout>
+        android:text="عرض الكل علي الخريطة"
+        android:background="@mipmap/buttom"
+         android:layout_marginBottom="14dp"
+        android:textColor="#000"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

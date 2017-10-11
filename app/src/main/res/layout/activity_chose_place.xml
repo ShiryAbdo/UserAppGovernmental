@@ -4,17 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+     android:layout_gravity="center"
+     android:layoutDirection="rtl"
+    android:padding="@dimen/_5sdp"
+    android:background="@mipmap/background"
      tools:context="egypt.service.governmentall.ChosePlace"
     android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_border"
+        android:layout_width="wrap_content"
+        android:text="أختار المنطقه  والمحافظة"
+        android:padding="@dimen/_5sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+    <TextView
+         android:layout_width="wrap_content"
+         android:padding="@dimen/_3sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_20sdp"
+        android:layout_height="@dimen/_100sdp" />
 
     <LinearLayout
+        android:layoutDirection="rtl"
         android:layout_gravity="center"
         android:gravity="center"
         android:weightSum="3"
          android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp"
+            android:layoutDirection="rtl"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,21 +49,24 @@
             android:layout_weight="2"
             android:layout_margin="20dp"
             android:id="@+id/spinner_gavernorate"
-            android:background="#df2c2c"
-            android:layout_gravity="center"
+             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_height="30dp"
             />
     </LinearLayout>
 
     <LinearLayout
+        android:layoutDirection="rtl"
         android:weightSum="3"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layoutDirection="rtl"
             android:layout_weight="1"
+            android:textColor="#000"
+            android:textSize="@dimen/_20sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="الأماكن"/>
@@ -47,17 +75,19 @@
             android:layout_weight="2"
             android:layout_margin="20dp"
             android:id="@+id/spinner_place"
-            android:background="#df2c2c"
-            android:layout_gravity="center"
+             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_height="30dp"
             />
     </LinearLayout>
 
     <Button
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@mipmap/buttom"
         android:padding="@dimen/_10sdp"
         android:id="@+id/serch"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="بحث" />
 

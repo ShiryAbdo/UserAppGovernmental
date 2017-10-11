@@ -1,7 +1,120 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layoutDirection="rtl"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layoutDirection="rtl"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <EditText
+            android:layoutDirection="rtl"
+            android:id="@+id/TF_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/B_search"
+            android:layout_weight="1.01"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:layoutDirection="rtl"
+            android:background="@drawable/rounded_border"
+            android:layout_margin="@dimen/_5sdp"
+             android:id="@+id/B_search"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/TF_location"
+            android:layout_alignParentEnd="true"
+            android:onClick="onClick"
+            android:text="أبحث"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+         android:layout_below="@+id/B_hospital" />
+
+
+    <TextView
+        android:layoutDirection="rtl"
+        android:layout_width="wrap_content"
+         android:background="#ffffff"
+        android:gravity="center"
+        android:text="..."
+        android:textColor="#000"
+         android:id="@+id/tv_distance_time"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/B_hospital"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout"
+        android:onClick="onClick"
+        android:visibility="gone"
+        android:text="Hospitals" />
+
+    <Button
+        android:id="@+id/B_restaurant"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toEndOf="@+id/B_hospital"
+        android:onClick="onClick"
+        android:text="Restaurants" />
+
+    <Button
+        android:id="@+id/B_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toEndOf="@+id/B_restaurant"
+        android:onClick="onClick"
+        android:text="Schools" />
+
+    <Button
+        android:layoutDirection="rtl"
+        android:id="@+id/B_to"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:onClick="onClick"
+        android:text="عرض  التوجيهات"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/B_hospital"
+        android:layout_toEndOf="@+id/B_hospital"
+        android:layout_marginLeft="18dp"
+        android:textStyle="bold"
+        android:layout_marginStart="18dp" />
+
+
+</RelativeLayout>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
+    android:background="@mipmap/background"
+    android:layoutDirection="rtl"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,8 +10,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"
+         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
 
@@ -26,10 +27,11 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:layoutDirection="rtl"
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="البريد الألكتروني "
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -42,11 +44,12 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:layoutDirection="rtl"
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:hint="@string/hint_password"
+                android:hint="كلمة المرور"
                 android:imeActionId="@+id/login"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
@@ -57,37 +60,39 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:layoutDirection="rtl"
             android:id="@+id/sign_up_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
-            android:text="@string/action_sign_in_short"
+            android:background="@drawable/button"
+             android:text="تسجيل"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <Button
+            android:layoutDirection="rtl"
             android:id="@+id/btn_reset_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
-            android:text="@string/btn_forgot_password"
+            android:text="نسيت كلمة المرور"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="#000" />
 
         <!-- Link to Login Screen -->
 
         <Button
+            android:layoutDirection="rtl"
             android:id="@+id/sign_in_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
-            android:text="@string/btn_link_to_login"
+            android:text="لدي أكونت"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+             android:textColor="#000"
             android:textSize="15dp" />
     </LinearLayout>
 

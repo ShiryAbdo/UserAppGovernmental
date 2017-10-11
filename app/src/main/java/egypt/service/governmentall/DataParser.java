@@ -1,5 +1,6 @@
 package egypt.service.governmentall;
-import com.google.android.gms.maps.model.LatLng;
+
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,93 +10,170 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DataParser {
+/**
+ * Created by falcon on 09/10/2017.
+ */
 
-    /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
-    public List<List<HashMap<String,String>>> parse(JSONObject jObject){
+public class DataParser  {
 
-        List<List<HashMap<String, String>>> routes = new ArrayList<>() ;
-        JSONArray jRoutes;
-        JSONArray jLegs;
-        JSONArray jSteps;
+
+     protected HashMap<String,String> getDuration(String jsonData)
+    {
+
+
+        JSONArray jsonArray = null;
+        JSONObject jsonObject;
+
+
+        HashMap<String,String> googleDirectionsMap = new HashMap<>();
+        String duration = "";
+        String distance ="";
+
 
         try {
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONArray("legs");
+            duration = jsonArray.getJSONObject(0).getJSONObject("duration").getString("text");
+            distance = jsonArray.getJSONObject(0).getJSONObject("distance").getString("text");
 
-            jRoutes = jObject.getJSONArray("routes");
-
-            /** Traversing all routes */
-            for(int i=0;i<jRoutes.length();i++){
-                jLegs = ( (JSONObject)jRoutes.get(i)).getJSONArray("legs");
-                List path = new ArrayList<>();
-
-                /** Traversing all legs */
-                for(int j=0;j<jLegs.length();j++){
-                    jSteps = ( (JSONObject)jLegs.get(j)).getJSONArray("steps");
-
-                    /** Traversing all steps */
-                    for(int k=0;k<jSteps.length();k++){
-                        String polyline = "";
-                        polyline = (String)((JSONObject)((JSONObject)jSteps.get(k)).get("polyline")).get("points");
-                        List<LatLng> list = decodePoly(polyline);
-
-                        /** Traversing all points */
-                        for(int l=0;l<list.size();l++){
-                            HashMap<String, String> hm = new HashMap<>();
-                            hm.put("lat", Double.toString((list.get(l)).latitude) );
-                            hm.put("lng", Double.toString((list.get(l)).longitude) );
-                            path.add(hm);
-                        }
-                    }
-                    routes.add(path);
-                }
-            }
+            googleDirectionsMap.put("duration" , duration);
+            googleDirectionsMap.put("distance", distance);
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }catch (Exception e){
         }
 
 
-        return routes;
+        return googleDirectionsMap;
     }
 
 
-    /**
-     * Method to decode polyline points
-     * Courtesy : http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
-     * */
-    private List<LatLng> decodePoly(String encoded) {
+    private HashMap<String, String> getPlace(JSONObject googlePlaceJson)
+    {
+        HashMap<String, String> googlePlacesMap = new HashMap<>();
+        String placeName = "-NA-";
+        String vicinity = "-NA-";
+        String latitude = "";
+        String longitude = "";
+        String reference = "";
+        Log.d("getPlace", "Entered");
 
-        List<LatLng> poly = new ArrayList<>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
 
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
+        try {
+            if(!googlePlaceJson.isNull("name"))
+            {
 
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
+                placeName = googlePlaceJson.getString("name");
 
-            LatLng p = new LatLng((((double) lat / 1E5)),
-                    (((double) lng / 1E5)));
-            poly.add(p);
+            }
+            if( !googlePlaceJson.isNull("vicinity"))
+            {
+                vicinity = googlePlaceJson.getString("vicinity");
+
+            }
+            latitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lat");
+            longitude = googlePlaceJson.getJSONObject("geometry").getJSONObject("location").getString("lng");
+
+            reference = googlePlaceJson.getString("reference");
+
+            googlePlacesMap.put("place_name" , placeName);
+            googlePlacesMap.put("vicinity" , vicinity);
+            googlePlacesMap.put("lat" , latitude);
+            googlePlacesMap.put("lng" , longitude);
+            googlePlacesMap.put("reference" , reference);
+
+
+            Log.d("getPlace", "Putting Places");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        return poly;
+        return googlePlacesMap;
     }
+
+
+
+    private List<HashMap<String,String>> getPlaces(JSONArray jsonArray)
+    {
+        int count = jsonArray.length();
+        List<HashMap<String,String>> placesList = new ArrayList<>();
+        HashMap<String,String> placeMap = null;
+        Log.d("Places", "getPlaces");
+
+        for(int i = 0;i<count;i++)
+        {
+            try {
+                placeMap = getPlace((JSONObject) jsonArray.get(i));
+                placesList.add(placeMap);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return placesList;
+
+    }
+
+    public List<HashMap<String,String>> parse(String jsonData)
+    {
+        JSONArray jsonArray = null;
+        JSONObject jsonObject;
+
+        try {
+            Log.d("Places", "parse");
+
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("results");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return getPlaces(jsonArray);
+    }
+
+    public String[] parseDirections(String jsonData)
+    {
+        JSONArray jsonArray = null;
+        JSONObject jsonObject;
+
+        try {
+            jsonObject = new JSONObject(jsonData);
+            jsonArray = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return getPaths(jsonArray);
+    }
+
+    public String[] getPaths(JSONArray googleStepsJson )
+    {
+        int count = googleStepsJson.length();
+        String[] polylines = new String[count];
+
+        for(int i = 0;i<count;i++)
+        {
+            try {
+                polylines[i] = getPath(googleStepsJson.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return polylines;
+    }
+
+    public String getPath(JSONObject googlePathJson)
+    {
+        String polyline = "";
+        try {
+            polyline = googlePathJson.getJSONObject("polyline").getString("points");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return polyline;
+    }
+
+
 }
-//MapShowLocation

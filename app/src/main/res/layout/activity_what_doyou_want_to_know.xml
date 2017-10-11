@@ -6,18 +6,23 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
+    android:layoutDirection="rtl"
+    android:background="@mipmap/background"
     tools:context="egypt.service.governmentall.WhatDoyouWantToKnow"
     android:orientation="vertical">
 
 
     <Button
+        android:layoutDirection="rtl"
         android:id="@+id/paperWanted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@mipmap/buttom"
         android:text="الأوراق المطلوبه" />
 
     <Button
+        android:layoutDirection="rtl"
+        android:background="@mipmap/buttom"
         android:id="@+id/nearPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

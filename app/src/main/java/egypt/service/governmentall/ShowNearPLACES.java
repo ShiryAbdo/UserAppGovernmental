@@ -56,8 +56,7 @@ public class ShowNearPLACES extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         bundle = getIntent().getExtras();
         AreastArarry = new ArrayList<>();
-        latLongTV = (TextView) findViewById(R.id.latLongTV);
-        locationArrayList =new ArrayList<>();
+         locationArrayList =new ArrayList<>();
         distanceArray=new ArrayList<>();
         dataLocationsArray=new ArrayList<>();
         gavernoratWithLocations=new ArrayList<>();
@@ -104,53 +103,57 @@ public class ShowNearPLACES extends AppCompatActivity {
         mDatabase.child("users").child("Service").child(typeService).child("places").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
 
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         String value = dataSnapshot1.getKey();
                         places places = dataSnapshot1.getValue(places.class);
-                        double latitude  =places.getLatitude();
-                        latLongTV.setText(latitude+"");
-                        Location location= new Location("");//provider name is unnecessary
+//                        String value=places.getName();
+                        double latitude = places.getLatitude();
+                        Location location = new Location("");//provider name is unnecessary
                         location.setLatitude(places.getLatitude());//your coords of course
                         location.setLongitude(places.getLongitude());
-                        LatLng sydney = new LatLng(places.getLatitude(),places.getLongitude());
-                        GavernoratWithLocation gavernoratWithLocation =new GavernoratWithLocation(value,sydney);
-                            if(! gavernoratWithLocations.contains(gavernoratWithLocation)){
-                                gavernoratWithLocations.add(gavernoratWithLocation);
-                            }
+                        LatLng sydney = new LatLng(places.getLatitude(), places.getLongitude());
+                        distanceArray.add(sydney);
+                        GavernoratWithLocation gavernoratWithLocation = new GavernoratWithLocation(value, sydney);
+                        if (!gavernoratWithLocations.contains(gavernoratWithLocation)) {
+                            gavernoratWithLocations.add(gavernoratWithLocation);
+                        }
                         AreastArarry.add(value);
                         data.add(value);
-
 
 
                     }
 
 
+                    for (int i = 0; i < gavernoratWithLocations.size(); i++) {
+//                    distanceArray.add(gavernoratWithLocations.get(i).getLocatio());
 
-                for (int i = 0; i < gavernoratWithLocations.size(); i++) {
 
+                        if (distance(gavernoratWithLocations.get(i).getLocatio().latitude, gavernoratWithLocations.get(i).getLocatio().longitude, targetLocation.getLatitude(), targetLocation.getLongitude()) < 6371) {
 
-
-                    if (distance(gavernoratWithLocations.get(i).getLocatio().latitude, gavernoratWithLocations.get(i).getLocatio().longitude,   targetLocation.getLatitude(), targetLocation.getLongitude()) < 6371) {
-                        distanceArray.add(gavernoratWithLocations.get(i).getLocatio());
-                        String adress =gavernoratWithLocations.get(i).getGovernoratname();
-                        Location newLocation= new Location("");//provider name is unnecessary
-                        newLocation.setLatitude(gavernoratWithLocations.get(i).getLocatio().latitude);//your coords of course
-                        newLocation.setLongitude(gavernoratWithLocations.get(i).getLocatio().longitude);
-                        LatLng sydney = new LatLng(gavernoratWithLocations.get(i).getLocatio().latitude,gavernoratWithLocations.get(i).getLocatio().longitude);
-                        float distanceInMeters =  targetLocation.distanceTo(newLocation);
-                        DataLocation dataLocation = new DataLocation(adress,distanceInMeters ,sydney);
+                            String adress = gavernoratWithLocations.get(i).getGovernoratname();
+                            Location newLocation = new Location("");//provider name is unnecessary
+                            newLocation.setLatitude(gavernoratWithLocations.get(i).getLocatio().latitude);//your coords of course
+                            newLocation.setLongitude(gavernoratWithLocations.get(i).getLocatio().longitude);
+                            LatLng sydney = new LatLng(gavernoratWithLocations.get(i).getLocatio().latitude, gavernoratWithLocations.get(i).getLocatio().longitude);
+                            float distanceInMeters = targetLocation.distanceTo(newLocation);
+                            DataLocation dataLocation = new DataLocation(adress, distanceInMeters, sydney);
 //                        if(!dataLocationsArray.contains(dataLocation)){
                             dataLocationsArray.add(dataLocation);
 //                        }
 
 
+                        }
+                        adatorOfareas = new AdatorOfareas(dataLocationsArray, ShowNearPLACES.this, LOH);
+                        recyclerView.setAdapter(adatorOfareas);
+
                     }
-                    adatorOfareas=new AdatorOfareas(dataLocationsArray,ShowNearPLACES.this,LOH );
-                    recyclerView.setAdapter(adatorOfareas);
-
-
                 }
+
+
+
+
 
             }
 

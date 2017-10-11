@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,10 +83,10 @@ public class ChoseServiceDataAdapter extends RecyclerView.Adapter<ChoseServiceDa
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView factory_name,cintery_name,email_factory;
-        private CardView card;
+        private LinearLayout card;
         public ViewHolder(View view) {
             super(view);
-            card=(CardView)view.findViewById(R.id.cardView);
+            card=(LinearLayout)view.findViewById(R.id.cardView);
             cintery_name = (TextView)view.findViewById(R.id.title);
 
         }

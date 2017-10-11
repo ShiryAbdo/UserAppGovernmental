@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -74,10 +75,10 @@ public class ChosePaperDataAdapter   extends RecyclerView.Adapter<ChosePaperData
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView position,cintery_name,email_factory;
-        private CardView card;
+        private LinearLayout card;
         public ViewHolder(View view) {
             super(view);
-            card=(CardView)view.findViewById(R.id.cardView);
+            card=(LinearLayout)view.findViewById(R.id.cardView);
             cintery_name = (TextView)view.findViewById(R.id.title);
             position = (TextView)view.findViewById(R.id.position);
 

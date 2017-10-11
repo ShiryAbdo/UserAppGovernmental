@@ -69,7 +69,7 @@ public class ShowDirectionInmap extends FragmentActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_mapsone);
         displayPromptForEnablingGPS(this);
         points= new ArrayList<>();
          if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -255,7 +255,7 @@ public class ShowDirectionInmap extends FragmentActivity implements OnMapReadyCa
             try {
                 jObject = new JSONObject(jsonData[0]);
                 Log.d("ParserTask",jsonData[0].toString());
-                DataParser parser = new DataParser();
+                DataParser_Refaxctor parser = new DataParser_Refaxctor();
                 Log.d("ParserTask", parser.toString());
 
                 // Starts parsing data
@@ -367,52 +367,7 @@ public class ShowDirectionInmap extends FragmentActivity implements OnMapReadyCa
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8));
 
 
-//        // Already two locations
-//        if (MarkerPoints.size() > 1) {
-//            MarkerPoints.clear();
-//            mMap.clear();
-//        }
 
-//        // Adding new item to the ArrayList
-//        MarkerPoints.add(latLng);
-//
-//        // Creating MarkerOptions
-//        MarkerOptions options = new MarkerOptions();
-//
-//        // Setting the position of the marker
-//        options.position(latLng);
-//
-//        /**
-//         * For the start location, the color of marker is GREEN and
-//         * for the end location, the color of marker is RED.
-//         */
-//        if (MarkerPoints.size() == 1) {
-//            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//        } else if (MarkerPoints.size() == 2) {
-//            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-//        }
-//
-//
-//        // Add new marker to the Google Map Android API V2
-//        mMap.addMarker(options);
-//
-//        // Checks, whether start and end locations are captured
-//        if (MarkerPoints.size() >= 2) {
-//            LatLng origin = MarkerPoints.get(0);
-//            LatLng dest = MarkerPoints.get(1);
-//
-//            // Getting URL to the Google Directions API
-//            String url = getUrl(origin, dest);
-//            Log.d("onMapClick", url.toString());
-//            FetchUrl FetchUrl = new FetchUrl();
-//
-//            // Start downloading json data from Google Directions API
-//            FetchUrl.execute(url);
-//            //move map camera
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
-//            mMap.animateCamera(CameraUpdateFactory.zoomTo(5));
-
-            //stop location updates
             if (mGoogleApiClient != null) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
             }

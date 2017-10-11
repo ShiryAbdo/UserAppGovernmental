@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -51,12 +53,13 @@ public class AdatorOfareas    extends RecyclerView.Adapter<AdatorOfareas.ViewHol
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,ShowDirectionInmap.class);
+                Intent intent = new Intent(context,newDirection.class);
+                Toast.makeText(context,""+androidList.get(i).getLatlangLocatio().latitude,Toast.LENGTH_LONG).show();
 
                 intent.putExtra("LATITUDE_ID",androidList.get(i).getLatlangLocatio().latitude);
                 intent.putExtra("LONGITUDE_ID",androidList.get(i).getLatlangLocatio().longitude);
-                intent.putExtra("LATITUDE_ID_crountLocation",location.latitude);
-                intent.putExtra("LONGITUDE_ID_crountLocation",location.longitude);
+//                intent.putExtra("LATITUDE_ID_crountLocation",location.latitude);
+//                intent.putExtra("LONGITUDE_ID_crountLocation",location.longitude);
                 context.startActivity(intent);
 
             }
@@ -85,10 +88,10 @@ public class AdatorOfareas    extends RecyclerView.Adapter<AdatorOfareas.ViewHol
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView position,cintery_name,email_factory;
-        private CardView card;
+        private LinearLayout card;
         public ViewHolder(View view) {
             super(view);
-            card=(CardView)view.findViewById(R.id.cardView);
+            card=(LinearLayout)view.findViewById(R.id.cardView);
             cintery_name = (TextView)view.findViewById(R.id.title);
             position = (TextView)view.findViewById(R.id.position);
 

@@ -62,7 +62,7 @@ public class MapShowLocation extends FragmentActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         points=new ArrayList<>();
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_mapsone);
         markerPoints = new ArrayList<LatLng>();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -101,8 +101,10 @@ public class MapShowLocation extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000 * 60 * 1);
-        mLocationRequest.setFastestInterval(1000 * 60 * 1);
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+//        mLocationRequest.setInterval(1000 * 60 * 60);
+//        mLocationRequest.setFastestInterval(1000 * 60 * 1);
         mLocationRequest.setSmallestDisplacement(0.25F); //added
 
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
