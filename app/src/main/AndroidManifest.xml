@@ -71,8 +71,13 @@
             android:name=".SplachScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_splach_screen"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".Test">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

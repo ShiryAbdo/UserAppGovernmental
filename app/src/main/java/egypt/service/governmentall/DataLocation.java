@@ -9,10 +9,10 @@ import com.google.android.gms.maps.model.LatLng;
 public class DataLocation {
 
     String nameOfLocation ;
-    float distance ;
+    String distance ;
     LatLng LatlangLocatio;
 
-    public DataLocation(String nameOfLocation, float distance , LatLng latLng) {
+    public DataLocation(String nameOfLocation, String distance , LatLng latLng) {
         this.nameOfLocation = nameOfLocation;
         this.distance = distance;
         this.LatlangLocatio=latLng;
@@ -22,7 +22,7 @@ public class DataLocation {
         return nameOfLocation;
     }
 
-    public float getDistance() {
+    public String getDistance() {
         return distance;
     }
 

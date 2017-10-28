@@ -2,6 +2,7 @@ package egypt.service.governmentall;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,11 +27,13 @@ public class AdatorOfareas    extends RecyclerView.Adapter<AdatorOfareas.ViewHol
     private Context context;
     private int lastPosition=-1;
        LatLng location;
+    ArrayList<String> distance_nm ;
 
-    public AdatorOfareas(ArrayList<DataLocation> android,Context c ,LatLng latLng) {
+    public AdatorOfareas(ArrayList<DataLocation> android,Context c ,LatLng latLng ,ArrayList<String> distance) {
         this.androidList = android;
         this.context=c;
         this.location=latLng;
+        this.distance_nm=distance;
     }
 
     @Override
@@ -42,25 +45,44 @@ public class AdatorOfareas    extends RecyclerView.Adapter<AdatorOfareas.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(AdatorOfareas.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(final AdatorOfareas.ViewHolder viewHolder, final int i) {
 
 
         viewHolder.cintery_name.setText(androidList.get(i).getNameOfLocation());
-        viewHolder.position.setText(androidList.get(i).getDistance()+"");
+                     viewHolder.position.setText("أعرض المسافه");
+
+//        if(!distance_nm.isEmpty()){
+//            viewHolder.position.setText(distance_nm.get(i));
+//        }
 
 
-
-        viewHolder.card.setOnClickListener(new View.OnClickListener() {
+        viewHolder.cintery_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,newDirection.class);
-                Toast.makeText(context,""+androidList.get(i).getLatlangLocatio().latitude,Toast.LENGTH_LONG).show();
 
-                intent.putExtra("LATITUDE_ID",androidList.get(i).getLatlangLocatio().latitude);
-                intent.putExtra("LONGITUDE_ID",androidList.get(i).getLatlangLocatio().longitude);
-//                intent.putExtra("LATITUDE_ID_crountLocation",location.latitude);
-//                intent.putExtra("LONGITUDE_ID_crountLocation",location.longitude);
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+androidList.get(i).getLatlangLocatio().latitude+","+androidList.get(i).getLatlangLocatio().longitude);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
                 context.startActivity(intent);
+
+            }
+        });
+
+        viewHolder.position.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                     Toast.makeText(context,distance_nm.get(i),Toast.LENGTH_LONG).show();
+                viewHolder.position.setText(distance_nm.get(i));
+
+
+
+//                Intent intent = new Intent(context,Test.class);
+////                Toast.makeText(context,""+androidList.get(i).getLatlangLocatio().latitude,Toast.LENGTH_LONG).show();
+//
+//                intent.putExtra("LATITUDE_ID",androidList.get(i).getLatlangLocatio().latitude);
+//                intent.putExtra("LONGITUDE_ID",androidList.get(i).getLatlangLocatio().longitude);
+//                intent.putExtra("LATITUDE_ID_crountLocation",location.latitude);
+////                intent.putExtra("LONGITUDE_ID_crountLocation",location.longitude);
+//                context.startActivity(intent);
 
             }
         });

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
 //    compileSdkVersion 'Google Apis:Google Apis:26'
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "egypt.service.governmentall"
         minSdkVersion 15
@@ -23,6 +23,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -39,7 +40,7 @@ dependencies {
     compile 'com.google.maps.android:android-maps-utils:0.3.+'
     compile 'com.google.android.gms:play-services-location:11.0.2'
     compile 'com.google.android.gms:play-services-places:11.0.2'
-    compile 'com.jakewharton:butterknife:6.1.0'
+//    compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.android.support:support-v4:26.+'

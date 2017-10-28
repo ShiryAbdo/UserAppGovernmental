@@ -17,7 +17,7 @@ public class ChoseServiceActivity extends AppCompatActivity {
     RecyclerView recyclerView ;
     ArrayList<String> data ;
     ChoseServiceDataAdapter adapter ;
-     DatabaseReference mDatabase;
+    DatabaseReference mDatabase;
 
 
     @Override

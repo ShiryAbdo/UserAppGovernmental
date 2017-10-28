@@ -7,8 +7,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -17,12 +19,16 @@ public class ShowAllInMap extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     ArrayList<LatLng> myList ;
+    Bundle bundle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_in_map);
-        myList = (ArrayList<LatLng>) getIntent().getSerializableExtra("mylist");
+        bundle = getIntent().getExtras();
+        myList = (ArrayList<LatLng>)bundle.getSerializable("mylist");
+//        (ArrayList<LatLng>) getIntent().getSerializableExtra("mylist");
 //        ArrayList<GavernoratWithLocation> testing = (ArrayList<GavernoratWithLocation>) ShowAllInMap.this.getIntent().getParcelableArrayListExtra("extraextra");
 
 
@@ -37,19 +43,24 @@ public class ShowAllInMap extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                insertMarkers(myList);
+            }
+        });
 
-        // Add a marker in Sydney and move the camera
-//        for (int i = 0; i < myList.size(); i++) {
-//            LatLng sydney = new LatLng(myList.get(i).latitude,myList.get(i).longitude);
-//             mMap.addMarker(new MarkerOptions().position(sydney).title("القاهره"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10.0f));
-//
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10.0f));
-//
-//        }
-        insertMarkers(myList);
+//         Add a marker in Sydney and move the camera
+        for (int i = 0; i < myList.size(); i++) {
+            LatLng sydney = new LatLng(myList.get(i).latitude,myList.get(i).longitude);
+             mMap.addMarker(new MarkerOptions().position(sydney).title("القاهره"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
+
+        }
+
 
     }
 
@@ -70,5 +81,15 @@ public class ShowAllInMap extends FragmentActivity implements OnMapReadyCallback
             builder.include(position);
         }
 
+    }
+
+    protected Marker createMarker(double latitude, double longitude, String title, String snippet, int iconResID) {
+
+        return mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title(title)
+                .snippet(snippet)
+            .icon(BitmapDescriptorFactory.fromResource(iconResID)));
     }
 }

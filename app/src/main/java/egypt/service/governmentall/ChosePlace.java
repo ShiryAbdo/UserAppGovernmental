@@ -104,7 +104,7 @@ public class ChosePlace extends AppCompatActivity {
                   String name =  parent.getItemAtPosition(position).toString();
                 if(name=="أختار  المحافظة"){
                     item=null;
-                    Toast.makeText(getApplicationContext(), "لم يتم إختيار المحافظه" + item, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "لم يتم إختيار المحافظه" + item, Toast.LENGTH_LONG).show();
 
                 }else if(name=="القاهره") {
                     categories_places.clear();
@@ -117,11 +117,11 @@ public class ChosePlace extends AppCompatActivity {
 
                 }else{
                     categories_places.clear();
-                    Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
                 }
             }
             public void onNothingSelected(AdapterView<?> arg0) {
-                Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
 
                 // TODO Auto-generated method stub
             }
@@ -148,23 +148,23 @@ public class ChosePlace extends AppCompatActivity {
                 String name =  parent.getItemAtPosition(position).toString();
                 if(name=="إختار منطقة"){
                     item_place=null;
-                    Toast.makeText(getApplicationContext(), "لم يتم إختيار منطقة" , Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "لم يتم إختيار منطقة" , Toast.LENGTH_LONG).show();
 
                 }else if(name=="أختار الكل") {
                     item_place="الجيزه";
 
                 } else{
                     categories_places.clear();
-                    Toast.makeText(getApplicationContext(), "أختار منطقة", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "أختار منطقة", Toast.LENGTH_LONG).show();
                 }
 
 
 
                 // Showing selected spinner item
-                Toast.makeText(parent.getContext(),  item_place, Toast.LENGTH_LONG).show();
+//                Toast.makeText(parent.getContext(),  item_place, Toast.LENGTH_LONG).show();
             }
             public void onNothingSelected(AdapterView<?> arg0) {
-                Toast.makeText(getApplicationContext(), "أختار منطقة"  , Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "أختار منطقة"  , Toast.LENGTH_LONG).show();
                 // TODO Auto-generated method stub
             }
         });
@@ -172,11 +172,11 @@ public class ChosePlace extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(item_place==null){
-                    Toast.makeText(getApplicationContext(), "أختار منطقة"  , Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "أختار منطقة"  , Toast.LENGTH_LONG).show();
 
 
                 }else if(item==null){
-                    Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
                 }else{
                     Intent intent = new Intent(ChosePlace.this,ShowNearPLACES.class);
                     intent.putExtra("ChoseTypeService",Tyep_OfTypeService);
