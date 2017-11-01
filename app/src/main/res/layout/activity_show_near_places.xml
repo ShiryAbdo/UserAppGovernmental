@@ -9,22 +9,20 @@
     android:background="@mipmap/background"
     tools:context="egypt.service.governmentall.ShowNearPLACES"
     android:orientation="vertical">
-<TextView
-    android:background="@drawable/rounded_border"
-    android:layout_width="wrap_content"
-    android:text="عرض الأماكن"
-    android:padding="@dimen/_3sdp"
-    android:gravity="center"
-    android:textSize="@dimen/_20sdp"
-    android:textColor="#000"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="40dp"
-    android:layout_marginEnd="40dp"
-    android:layout_marginTop="11dp"
-    android:id="@+id/textView2"
-    android:layout_alignParentTop="true"
-    android:layout_alignRight="@+id/ShowALLinMap"
-    android:layout_alignEnd="@+id/ShowALLinMap" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/rounded_border"
+        android:gravity="center"
+        android:padding="@dimen/_3sdp"
+        android:text="عرض الأماكن"
+        android:textColor="#000"
+        android:textSize="@dimen/_20sdp" />
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,21 +34,32 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
-
-
+<LinearLayout
+    android:gravity="end"
+    android:layout_gravity="start"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <Button
         android:layoutDirection="rtl"
         android:id="@+id/ShowALLinMap"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/_2sdp"
+        android:padding="@dimen/_3sdp"
         android:text="عرض الكل علي الخريطة"
-        android:background="@mipmap/buttom"
-         android:layout_marginBottom="14dp"
-        android:textColor="#000"
+        android:textSize="@dimen/_15sdp"
+        android:background="@drawable/round"
+          android:textColor="#000"
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+</LinearLayout>
+
+
 
 
 </RelativeLayout>

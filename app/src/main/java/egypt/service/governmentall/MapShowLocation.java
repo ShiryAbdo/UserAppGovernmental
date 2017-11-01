@@ -86,6 +86,7 @@ public class MapShowLocation extends FragmentActivity implements OnMapReadyCallb
                 mMap.setMyLocationEnabled(true);
             }
         } else {
+
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }

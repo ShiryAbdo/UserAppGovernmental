@@ -155,7 +155,7 @@ public class ShowNearPLACES extends AppCompatActivity {
          sb.append(area).append(",");
         sb.append("محافظة").append(gavernorate);
         result = sb.toString();
-        result =area+","+"محافظة"+gavernorate;
+        result = area+","+"محافظة"+gavernorate;
         if(result!=null){
             LOH=  LocationFromAddress(result);
         }
@@ -255,7 +255,7 @@ public class ShowNearPLACES extends AppCompatActivity {
         ShowALLnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShowNearPLACES.this,ShowAllInMap.class);
+                Intent intent = new Intent(ShowNearPLACES.this,MapsActivityShow.class);
 //                intent.putIntegerArrayListExtra("mylist", distanceArray);
                 intent.putParcelableArrayListExtra("mylist", distanceArray);
 
