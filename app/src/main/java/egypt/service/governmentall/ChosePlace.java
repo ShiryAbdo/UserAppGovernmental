@@ -3,6 +3,7 @@ package egypt.service.governmentall;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,6 +52,7 @@ public class ChosePlace extends AppCompatActivity {
             typeService= bundle.getString("serviceName");
             Tyep_OfTypeService=bundle.getString("ChoseTypeService");
         }
+        Toast.makeText(getApplicationContext(),typeService,Toast.LENGTH_LONG).show();
         spinner_gavernorate =(Spinner)findViewById(R.id.spinner_gavernorate);
         spinner_place =(Spinner)findViewById(R.id.spinner_place);
         spinner_supAreas=(Spinner)findViewById(R.id.spinner_supAreas);
@@ -120,12 +122,12 @@ public class ChosePlace extends AppCompatActivity {
                   String name =  parent.getItemAtPosition(position).toString();
                 if(name=="أختار  المحافظة"){
                     governorate=null;
-//                    Toast.makeText(getApplicationContext(), "لم يتم إختيار المحافظه" + item, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "لم يتم إختيار المحافظه" + item, Toast.LENGTH_LONG).show();
 
 
                 }else{
                     governorate = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(getApplicationContext(),governorate,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(),governorate,Toast.LENGTH_LONG).show();
                     categories_places.clear();
                     categories_places.add("إختار منطقة");
                     mDatabase.child("users").child("Governorate").child(name).child("citys").child("cityNameHash").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -192,12 +194,12 @@ public class ChosePlace extends AppCompatActivity {
                   nameCity =  parent.getItemAtPosition(position).toString();
                 if(nameCity=="إختار المدينة"){
                     item_place=null;
-//                    Toast.makeText(getApplicationContext(), "لم يتم إختيار منطقة" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "لم يتم إختيار منطقة" , Toast.LENGTH_LONG).show();
 
 
                 } else{
                     item_place = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(getApplicationContext(),item_place,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(),item_place,Toast.LENGTH_LONG).show();
 
                     numberOfChoices.add(nameCity);
                     catogersArea.clear();
@@ -271,7 +273,7 @@ public class ChosePlace extends AppCompatActivity {
 
                 }else {
                     supAreaNmae = parent.getItemAtPosition(position).toString();
-                    Toast.makeText(parent.getContext(),supAreaNmae  , Toast.LENGTH_LONG).show();
+//                    Toast.makeText(parent.getContext(),supAreaNmae  , Toast.LENGTH_LONG).show();
 
                 }
 
@@ -292,22 +294,22 @@ public class ChosePlace extends AppCompatActivity {
                 if (item_place == null) {
                     Toast.makeText(getApplicationContext(), "أختار المدينة"  , Toast.LENGTH_LONG).show();
 
-
                 } else if (governorate == null) {
                     Toast.makeText(getApplicationContext(), "أختار محافظة", Toast.LENGTH_LONG).show();
-                } else if (supAreaNmae==null) {
-                    Toast.makeText(getApplicationContext(), "أختار الحي", Toast.LENGTH_LONG).show();
-
 
 
                 }else{
-                                Intent intent = new Intent(ChosePlace.this,ShowNearPLACES.class);
+//                    Toast.makeText(getApplicationContext(), governorate  , Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), item_place  , Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), supAreaNmae  , Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(ChosePlace.this,LocationActivity.class);
                                 intent.putExtra("ChoseTypeService",Tyep_OfTypeService);
                                 intent.putExtra("serviceName",typeService);
                                 intent.putExtra("gavernorate",governorate);
                                 intent.putExtra("area",item_place);
                                 intent.putExtra("supArea",supAreaNmae);
                                 startActivity(intent);
+                                finish();
                 }
 
 
@@ -317,5 +319,15 @@ public class ChosePlace extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent setIntent = new Intent(ChosePlace.this , WhatDoyouWantToKnow.class);
+        setIntent.putExtra("ChoseTypeService",Tyep_OfTypeService);
+        setIntent.putExtra("serviceName",typeService);
+
+        startActivity(setIntent);
     }
 }

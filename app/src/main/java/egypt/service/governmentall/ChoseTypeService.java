@@ -1,9 +1,11 @@
 package egypt.service.governmentall;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -68,5 +70,13 @@ public class ChoseTypeService extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent setIntent = new Intent(ChoseTypeService.this , ChoseServiceActivity.class);
+         setIntent.putExtra("serviceName",typeService);
+        startActivity(setIntent);
+        finish();
     }
 }
